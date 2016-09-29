@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Wechat4net.Utils;
 
 namespace Wechat4net
 {
@@ -23,6 +24,13 @@ namespace Wechat4net
         public static readonly int AppID;
 
         /// <summary>
+        /// 应用套件Token、EncodingAESKey和ID
+        /// </summary>
+        public static readonly string SuiteToken;
+        public static readonly string SuiteEncodingAESKey;
+        public static readonly string SuiteID;
+
+        /// <summary>
         /// 语言(MP需要，QY不需要)
         /// </summary>
         public static Utils.Enums.MP.Language Language;
@@ -37,6 +45,8 @@ namespace Wechat4net
         }
 
         private static Configuration config = null;
+
+
         static WechatConfig()
         {
             /*
@@ -47,6 +57,8 @@ namespace Wechat4net
             */
             ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
             fileMap.ExeConfigFilename = new Uri((Assembly.GetExecutingAssembly()).CodeBase).LocalPath + ".config";
+
+            new Logger(System.Web.HttpContext.Current.Server.MapPath(".") + "\\log").Info(fileMap.ExeConfigFilename);
             config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
 
             //TokenIssuer = config.AppSettings.Settings["TokenIssuer"].Value; //What should be a good value here? web api url?
@@ -62,6 +74,9 @@ namespace Wechat4net
             Secret = config.AppSettings.Settings["Secret"].Value;
             AppID = Convert.ToInt32(config.AppSettings.Settings["AppID"].Value);
             Language = (Utils.Enums.MP.Language)Convert.ToInt32(config.AppSettings.Settings["Language"].Value);
+            SuiteToken = config.AppSettings.Settings["SuiteToken"].Value;
+            SuiteEncodingAESKey = config.AppSettings.Settings["SuiteEncodingAESKey"].Value;
+            SuiteID = config.AppSettings.Settings["SuiteID"].Value;
         }
     }
 }

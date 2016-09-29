@@ -34,8 +34,10 @@ namespace Wechat4net.QY.Common
         
         public static readonly string GetUserList = "https://qyapi.weixin.qq.com/cgi-bin/user/simplelist";
         public static readonly string GetUserInfoList = "https://qyapi.weixin.qq.com/cgi-bin/user/list";
-        public static readonly string GetUserListByTag = "https://qyapi.weixin.qq.com/cgi-bin/tag/get";
 
+        public static readonly string GetTagList = "https://qyapi.weixin.qq.com/cgi-bin/tag/list";
+        public static readonly string GetTagUser = "https://qyapi.weixin.qq.com/cgi-bin/tag/get";
+        
         public static readonly string GetAppInfo = "https://qyapi.weixin.qq.com/cgi-bin/agent/get";
 
         public static readonly string GetJsApiTicket = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket";

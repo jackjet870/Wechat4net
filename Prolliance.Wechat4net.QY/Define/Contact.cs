@@ -38,6 +38,15 @@ namespace Wechat4net.QY.Define
             public List<WechatDept> DeptList { set; get; }
         }
 
+        public class QuiryTagListReturnValue : ReturnValue
+        {
+            /// <summary>
+            /// 标签列表数据
+            /// </summary>
+            [JsonProperty("taglist")]
+            public List<WechatTag> TagList { get; set; }
+        }
+
         /// <summary>
         /// 通讯录查询部门人员列表返回类
         /// </summary>

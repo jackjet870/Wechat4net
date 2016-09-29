@@ -103,6 +103,7 @@ namespace Tencent
             XmlDocument doc = new XmlDocument();
             XmlNode root;
             string sEncryptMsg;
+            
             try
             {
                 doc.LoadXml(sPostData);

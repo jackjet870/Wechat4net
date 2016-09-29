@@ -291,7 +291,6 @@ namespace Wechat4net.QY
         }
         #endregion
 
-
         #region 处理成员关注/取消关注事件
         public delegate void ProcessingEventSubscribeEventHandler(Object sender, ProcessingEventSubscribeEventArgs e);
         /// <summary>
@@ -368,6 +367,86 @@ namespace Wechat4net.QY
             if (ProcessingEventClick != null)
             { // 如果有对象注册
                 ProcessingEventClick(this, e);  // 调用所有注册对象的方法
+            }
+        }
+        #endregion
+
+        #region 处理扫码推事件且弹出“消息接收中”提示框的事件推送
+        public delegate void ProcessingEventScancodeWaitmsgEventHandler(Object sender, ProcessingEventScancodeWaitmsgEventArgs e);
+        /// <summary>
+        /// 处理点击菜单拉取消息事件
+        /// </summary>
+        public event ProcessingEventScancodeWaitmsgEventHandler ProcessingEventScancodeWaitmsg;
+
+        /// <summary>
+        /// 处理点击菜单拉取消息事件EventArgs。包含massageData
+        /// </summary>
+        public class ProcessingEventScancodeWaitmsgEventArgs : ProcessingEventArgs
+        {
+            /// <summary>
+            /// 接收的消息内容
+            /// </summary>
+            public ReceiveMessage.EventScancodeWaitmsg MessageData
+            {
+                private set { this.messageData = value; }
+                get { return this.messageData as ReceiveMessage.EventScancodeWaitmsg; }
+            }
+
+            /// <summary>
+            /// 实例化ProcessingEventScancodePushEventArgs
+            /// </summary>
+            /// <param name="massageData">消息内容</param>
+            public ProcessingEventScancodeWaitmsgEventArgs(ReceiveMessage.EventScancodeWaitmsg massageData)
+            {
+                this.MessageData = massageData;
+            }
+        }
+
+        protected virtual void OnProcessingEventScancodeWaitmsg(ProcessingEventScancodeWaitmsgEventArgs e)
+        {
+            if (ProcessingEventScancodeWaitmsg != null)
+            { // 如果有对象注册
+                ProcessingEventScancodeWaitmsg(this, e);  // 调用所有注册对象的方法
+            }
+        }
+        #endregion
+
+        #region 处理扫码推事件的事件推送
+        public delegate void ProcessingEventScancodePushEventHandler(Object sender, ProcessingEventScancodePushEventArgs e);
+        /// <summary>
+        /// 处理点击菜单拉取消息事件
+        /// </summary>
+        public event ProcessingEventScancodePushEventHandler ProcessingEventScancodePush;
+
+        /// <summary>
+        /// 处理点击菜单拉取消息事件EventArgs。包含massageData
+        /// </summary>
+        public class ProcessingEventScancodePushEventArgs : ProcessingEventArgs
+        {
+            /// <summary>
+            /// 接收的消息内容
+            /// </summary>
+            public ReceiveMessage.EventScancodePush MessageData
+            {
+                private set { this.messageData = value; }
+                get { return this.messageData as ReceiveMessage.EventScancodePush; }
+            }
+
+            /// <summary>
+            /// 实例化ProcessingEventScancodePushEventArgs
+            /// </summary>
+            /// <param name="massageData">消息内容</param>
+            public ProcessingEventScancodePushEventArgs(ReceiveMessage.EventScancodePush massageData)
+            {
+                this.MessageData = massageData;
+            }
+        }
+
+        protected virtual void OnProcessingEventScancodePush(ProcessingEventScancodePushEventArgs e)
+        {
+            if (ProcessingEventScancodePush != null)
+            { // 如果有对象注册
+                ProcessingEventScancodePush(this, e);  // 调用所有注册对象的方法
             }
         }
         #endregion
@@ -492,7 +571,6 @@ namespace Wechat4net.QY
         }
         #endregion
 
-
         #endregion
 
         #region 接收消息校验、加解密所需参数定义
@@ -530,10 +608,7 @@ namespace Wechat4net.QY
             {
                 throw new Exception("HttpContext信息错误");
             }
-            //this.MsgSig = HttpUtility.UrlDecode(context.Request.QueryString["msg_signature"], Encoding.UTF8);
-            //this.TimeStamp = HttpUtility.UrlDecode(context.Request.QueryString["timestamp"], Encoding.UTF8);
-            //this.Nonce = HttpUtility.UrlDecode(context.Request.QueryString["nonce"], Encoding.UTF8);
-            //this.Echostr = HttpUtility.UrlDecode(context.Request.QueryString["echostr"], Encoding.UTF8);
+
             this.MsgSig = context.Request.QueryString["msg_signature"];
             this.TimeStamp = context.Request.QueryString["timestamp"];
             this.Nonce = context.Request.QueryString["nonce"];
@@ -685,8 +760,20 @@ namespace Wechat4net.QY
                 case ReceiveMessageEnum.Event_View:
                     break;
                 case ReceiveMessageEnum.Event_Scancode_Push:
+                    if (ProcessingEventScancodePush != null)
+                    {
+                        ProcessingEventScancodePushEventArgs e = new ProcessingEventScancodePushEventArgs(messageEntity as ReceiveMessage.EventScancodePush);
+                        ProcessingEventScancodePush(this, e);
+                        retMessage = e.ReplyMessage;
+                    }
                     break;
                 case ReceiveMessageEnum.Event_Scancode_Waitmsg:
+                    if (ProcessingEventScancodeWaitmsg != null)
+                    {
+                        ProcessingEventScancodeWaitmsgEventArgs e = new ProcessingEventScancodeWaitmsgEventArgs(messageEntity as ReceiveMessage.EventScancodeWaitmsg);
+                        ProcessingEventScancodeWaitmsg(this, e);
+                        retMessage = e.ReplyMessage;
+                    }
                     break;
                 case ReceiveMessageEnum.Event_Pic_Sysphoto:
                     break;

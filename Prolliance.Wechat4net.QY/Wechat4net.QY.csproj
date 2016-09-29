@@ -65,9 +65,8 @@
     <DocumentationFile>bin\Release\Wechat4net.QY.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Prolliance.Wechat4net.Ref\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,6 +84,7 @@
     <Compile Include="Business\ReceiveMessageParser.cs" />
     <Compile Include="Business\ReplyMessageBuilder.cs" />
     <Compile Include="Business\PushMessageBuilder.cs" />
+    <Compile Include="AppSuiteManager.cs" />
     <Compile Include="CallbackManager.cs" />
     <Compile Include="Common\JsApiTicket.cs" />
     <Compile Include="Common\AccessToken.cs" />
@@ -107,6 +107,8 @@
     <Compile Include="Define\ReceiveMessage\EventClick.cs" />
     <Compile Include="Define\ReceiveMessage\EventEnterAgent.cs" />
     <Compile Include="Define\ReceiveMessage\EventLocation.cs" />
+    <Compile Include="Define\ReceiveMessage\EventScancodePush.cs" />
+    <Compile Include="Define\ReceiveMessage\EventScancodeWaitmsg.cs" />
     <Compile Include="Define\ReceiveMessage\EventSubscribe.cs" />
     <Compile Include="Define\ReceiveMessage\Image.cs" />
     <Compile Include="Define\ReceiveMessage\Location.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Define\WechatDept.cs" />
     <Compile Include="Define\PushMessageReturnValue.cs" />
     <Compile Include="Define\WechatOption.cs" />
+    <Compile Include="Define\WechatTag.cs" />
     <Compile Include="Define\WechatUser.cs" />
     <Compile Include="JsApi.cs" />
     <Compile Include="MediaFileManager.cs" />

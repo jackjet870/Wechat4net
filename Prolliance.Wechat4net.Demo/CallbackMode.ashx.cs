@@ -42,6 +42,7 @@ namespace Wechat4net.Demo
                 cm.ProcessingText += cm_ProcessingText;
                 cm.ProcessingImage += cm_ProcessingImage;
                 cm.ProcessingLocation += cm_ProcessingLocation;
+                cm.ProcessingEventScancodeWaitmsg += Cm_ProcessingEventScancodeWaitmsg;
                 cm.ProcessingEventBatchJobResult += cm_ProcessingEventBatchJobResult;
                 //.....
                 //其他类型注册和处理方法相同 省略
@@ -58,8 +59,17 @@ namespace Wechat4net.Demo
 
         }
 
+        private void Cm_ProcessingEventScancodeWaitmsg(object sender, CallbackManager.ProcessingEventScancodeWaitmsgEventArgs e)
+        {
+            ReceiveMessage.EventScancodeWaitmsg rec = e.MessageData;
+
+            ReplyMessage.Text ret = new QY.Define.ReplyMessage.Text(rec.FromUserName, rec.ToUserName, "登录成功");
+            e.ReplyMessage = ret;
+        }
+
         void cm_ProcessingEventBatchJobResult(object sender, CallbackManager.ProcessingEventBatchJobResultEventArgs e)
         {
+            Logger.Info("aaaa");
             ReceiveMessage.EventBatchJobResult rec = e.MessageData;
             Logger.Log("异步任务完成！errorCode=" + rec.ErrorCode + ",errorMessage=" + rec.ErrorMessage + ",jobID=" + rec.JobID);
         }

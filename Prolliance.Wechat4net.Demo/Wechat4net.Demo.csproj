@@ -48,12 +48,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxEngine">
-      <HintPath>..\..\..\..\..\Work\MobileOffice\WeChat\WeChat.Ref\AjaxEngine.dll</HintPath>
+      <HintPath>..\Prolliance.Wechat4net.Ref\AjaxEngine.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Prolliance.Wechat4net.Ref\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -71,6 +70,14 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="zxing, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.14.0.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -79,6 +86,7 @@
     <Content Include="AddUser.ashx" />
     <Content Include="JsApiTest.ashx" />
     <Content Include="packages.config" />
+    <Content Include="WebForm1.aspx" />
     <None Include="Properties\PublishProfiles\Location.pubxml" />
     <Content Include="UserInfoTest.ashx" />
     <Content Include="PushTest.ashx" />
@@ -86,7 +94,8 @@
     <Content Include="TestService.ashx" />
     <None Include="version.json" />
     <Content Include="testForm.aspx" />
-    <Content Include="Web.config" />
+    <None Include="Web.config" />
+    <Content Include="WechatAppSuite.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddUser.ashx.cs">
@@ -132,6 +141,16 @@
       <DependentUpon>UserInfoTest.ashx</DependentUpon>
     </Compile>
     <Compile Include="WebApp.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WechatAppSuite.ashx.cs">
+      <DependentUpon>WechatAppSuite.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CallbackMode.ashx" />

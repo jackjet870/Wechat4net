@@ -182,19 +182,7 @@ namespace Wechat4net.QY
             return HttpHelper.Get<Wechat4net.QY.Define.Contact.QuiryUserListByDeptReturnValue>(url);
         }
 
-        /// <summary>
-        /// 获取标签成员及部门
-        /// </summary>
-        /// <param name="tagId">标签ID</param>
-        /// <returns></returns>
-        public static Wechat4net.QY.Define.Contact.QuiryUserListByTagReturnValue GetUserList(int tagId)
-        {
-            string url = string.Format(
-                "{0}?access_token={1}&tagid={2}", ServiceUrl.GetUserListByTag, AccessToken.Value, tagId
-                );
-            //return Create().Get<Wechat4net.QY.Define.Contact.QuiryUserListByTagReturnValue>(url);
-            return HttpHelper.Get<Wechat4net.QY.Define.Contact.QuiryUserListByTagReturnValue>(url);
-        }
+        
         #endregion
 
         #region CreateUser
@@ -429,6 +417,45 @@ namespace Wechat4net.QY
                 Logger.Info("[DeleteUser] result : ErrorCode = " + result.ErrorCode + " ; ErrorMessage = " + result.ErrorMessage);
             }
             return result;
+        }
+        #endregion
+
+        #endregion
+
+        #region Tag
+
+        #region
+        /// <summary>
+        /// 获取标签列表
+        /// </summary>
+        /// <returns></returns>
+        public static Contact.QuiryTagListReturnValue GetTagList()
+        {
+            string url = string.Format(
+                "{0}?access_token={1}",
+                ServiceUrl.GetTagList,
+                AccessToken.Value
+                );
+            return HttpHelper.Get<Contact.QuiryTagListReturnValue>(url);
+        }
+        #endregion
+
+        #region GetTagUserList
+        /// <summary>
+        /// 获取标签成员及部门
+        /// </summary>
+        /// <param name="tagId">标签ID</param>
+        /// <returns></returns>
+        public static Contact.QuiryUserListByTagReturnValue GetTagUserList(int tagId)
+        {
+            string url = string.Format(
+                "{0}?access_token={1}&tagid={2}",
+                ServiceUrl.GetTagUser,
+                AccessToken.Value,
+                tagId
+                );
+
+            return HttpHelper.Get<Contact.QuiryUserListByTagReturnValue>(url);
         }
         #endregion
 

@@ -40,9 +40,8 @@
     <DocumentationFile>bin\Release\Wechat4net.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Prolliance.Wechat4net.Ref\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -73,15 +72,15 @@
     <Compile Include="WechatConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
+    <Content Include="Wechat4net.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)"=="Release" copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)Prolliance.Wechat4net.MP\bin\Release"
-if "$(ConfigurationName)"=="Release" copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)Prolliance.Wechat4net.QY\bin\Release" 
-if "$(ConfigurationName)"=="Debug" copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)Prolliance.Wechat4net.MP\bin\Debug" 
-if "$(ConfigurationName)"=="Debug" copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)Prolliance.Wechat4net.QY\bin\Debug"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

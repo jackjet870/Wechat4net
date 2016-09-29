@@ -67,8 +67,10 @@ namespace Wechat4net.QY.Business
                 case ReceiveMessageEnum.Event_View:
                     break;
                 case ReceiveMessageEnum.Event_Scancode_Push:
+                    rec = new ReceiveMessage.EventScancodePush();
                     break;
                 case ReceiveMessageEnum.Event_Scancode_Waitmsg:
+                    rec = new ReceiveMessage.EventScancodeWaitmsg();
                     break;
                 case ReceiveMessageEnum.Event_Pic_Sysphoto:
                     break;
